@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Meteor : MonoBehaviour
 {
-    float _speed = 3f;
+    float _speed = 2f;
     public Vector3 _velocity;
     // Start is called before the first frame update
     void Start()

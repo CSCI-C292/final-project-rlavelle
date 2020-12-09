@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyLaser : MonoBehaviour
 {
     Vector3 _velocity;
-    float _speed = 3.0f;
+    float _speed = 6f;
     // Start is called before the first frame update
     void Start()
     {

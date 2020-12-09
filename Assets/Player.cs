@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    float _speed = 4f;
+    float _speed = 3f;
     float _turnSensitivity = 200f;
-    
+    float upper = 15.36f;
+    float lower = -15.36f;
+    float left = -20.48f;
+    float right = 20.48f;
+
+
     [SerializeField] GameObject background;
     [SerializeField] Camera cam;
     [SerializeField] GameObject _laserPrefab;
@@ -21,32 +26,29 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-
-        // Collider2D resident = cam.GetComponent<Collider2D>();
-        // Collider2D zone = background.GetComponent<Collider2D>();
-        // if(zone.bounds.Contains(resident.bounds.max) && zone.bounds.Contains(resident.bounds.min)){
-        //     Debug.Log("ahhhh");
-        // }
-
         if(Input.GetButtonDown("Fire1")){
             Fire();
         }
 
         Move();
 
-    
-        // Vector3 cam_pos = cam.transform.position;
-        // Vector3 cam_size = cam.GetComponent<Collider2D>().bounds.size;
-        // Vector3 size = background.GetComponent<Collider2D>().bounds.size;
-        // Vector3 bg_pos = background.transform.position;
-    //cam_pos.x + cam_size.x > bg_pos.x + size.x || cam_pos.x - cam_size.x < bg_pos.x - size.x ||
-        // if(cam_pos.y + cam_size.y > bg_pos.y + size.y || cam_pos.y - cam_size.y < bg_pos.y - size.y){
-        //     // recenter background
-        //     Vector3 new_pos = cam.transform.position;
-        //     new_pos.z = 25;
-        //     background.transform.position = new_pos;
-        // }
+        UpdateBackground();
     }   
+
+    void UpdateBackground(){
+        if(transform.position.y >= background.transform.position.y + upper){
+            background.transform.position = new Vector3(background.transform.position.x, background.transform.position.y + upper, 14);
+        }
+        else if(transform.position.y <= background.transform.position.y + lower){
+            background.transform.position = new Vector3(background.transform.position.x, background.transform.position.y + lower, 14);
+        }
+        if(transform.position.x <= background.transform.position.x + left){
+            background.transform.position = new Vector3(background.transform.position.x + left, background.transform.position.y, 14);
+        }
+        else if(transform.position.x >= background.transform.position.x + right){
+            background.transform.position = new Vector3(background.transform.position.x + right, background.transform.position.y, 14);
+        }
+    }
 
     void Fire(){
         // create direction to fire to
@@ -73,24 +75,24 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A)){
             transform.Rotate(Vector3.forward*_turnSensitivity*Time.deltaTime);
             cam.transform.Rotate(Vector3.forward*_turnSensitivity*Time.deltaTime);
-            background.transform.Rotate(Vector3.forward*_turnSensitivity*Time.deltaTime);
+            //background.transform.Rotate(Vector3.forward*_turnSensitivity*Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.D)){
             transform.Rotate(-Vector3.forward*_turnSensitivity*Time.deltaTime);
             cam.transform.Rotate(-Vector3.forward*_turnSensitivity*Time.deltaTime);
-            background.transform.Rotate(-Vector3.forward*_turnSensitivity*Time.deltaTime);
+            //background.transform.Rotate(-Vector3.forward*_turnSensitivity*Time.deltaTime);
         }
 
         // move player forward
         if (Input.GetKey(KeyCode.W)){
             transform.position += -transform.up * _speed * Time.deltaTime;
             cam.transform.position += -transform.up * _speed * Time.deltaTime;
-            background.transform.position += -transform.up * _speed * Time.deltaTime;
+            //background.transform.position += -transform.up * _speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S)){
             transform.position += transform.up * _speed * Time.deltaTime;
             cam.transform.position += transform.up * _speed * Time.deltaTime;
-            background.transform.position += transform.up * _speed * Time.deltaTime;
+            //background.transform.position += transform.up * _speed * Time.deltaTime;
         }
     }
 

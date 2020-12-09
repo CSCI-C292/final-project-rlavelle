@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject firebox;
     GameObject player;
     Vector3 _vel;
-    float _speed = 1f;
+    float _speed = 2f;
     // Start is called before the first frame update
     void Start()
     {
