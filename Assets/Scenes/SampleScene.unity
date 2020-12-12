@@ -349,7 +349,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.52
+  m_Radius: 0.3
 --- !u!50 &125651714
 Rigidbody2D:
   serializedVersion: 4
@@ -743,7 +743,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301028506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.006, y: -1.005, z: 0}
+  m_LocalPosition: {x: 0.006, y: -0.419, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.5}
   m_Children: []
   m_Father: {fileID: 125651712}
@@ -2811,6 +2811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meteorPrefab: {fileID: 1362462986062553864, guid: b78a7ecde69c5417f9592d36c3427b6f, type: 3}
   _enemyPrefab: {fileID: 8398215644933367211, guid: bcd33ccb4a6a7441a8ddd5a55a4b44bb, type: 3}
+  player: {fileID: 125651709}
 --- !u!4 &1585931069
 Transform:
   m_ObjectHideFlags: 0

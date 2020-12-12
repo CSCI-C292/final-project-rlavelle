@@ -44,12 +44,6 @@ public class Enemy : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collider){
-        // if enemies hit meteor destroy both
-        if(collider.gameObject.name == "Meteor(Clone)"){
-            Destroy(collider.gameObject);
-            Destroy(gameObject);
-        }
-
         // if the player shoots an enemy we destroy both the laser and the enemy 
         if(collider.gameObject.name == "Laser(Clone)"){
             Destroy(gameObject);

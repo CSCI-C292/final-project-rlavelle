@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     
     [SerializeField] GameObject _meteorPrefab;
     [SerializeField] GameObject _enemyPrefab;
+    [SerializeField] GameObject player;
     float _xmin;
     float _xmax;
     float _ymin;
@@ -41,6 +42,40 @@ public class EnemySpawner : MonoBehaviour
     }
 
     void SpawnMeteor(){
+        Vector2 loc = new Vector2(player.transform.position.x, player.transform.position.y);
+        Vector2 point = loc + Random.insideUnitCircle*10;
+        GameObject meteor = Instantiate(_meteorPrefab, point,Quaternion.identity);
+        float xvel = Random.Range(-2f,2f);
+        float yvel = Random.Range(-2f,2f);
+        meteor.GetComponent<Meteor>().setVel(new Vector3(xvel,yvel,0));
+    }
+
+    void SpawnEnemy(){
+        float r = Random.Range(0,4);
+        GameObject enemy;
+        // top down
+        if(r==0){
+            float randX = Random.Range(_xmin,_xmax);
+            enemy = Instantiate(_enemyPrefab, new Vector3(randX, _yspawn_top, 0), Quaternion.identity);
+        }
+        // bottom up
+        if(r==1){
+            float randX = Random.Range(_xmin,_xmax);
+            enemy = Instantiate(_enemyPrefab, new Vector3(randX, _yspawn_bot, 0), Quaternion.identity);
+        }
+        // left to right
+        if(r==2){
+            float randY = Random.Range(_ymin,_ymax);
+            enemy = Instantiate(_enemyPrefab, new Vector3(_xspawn_left, randY, 0), Quaternion.identity);
+        }
+        // right to left
+        if(r==3){
+            float randY = Random.Range(_ymin,_ymax);
+            enemy = Instantiate(_enemyPrefab, new Vector3(_xspawn_right, randY, 0), Quaternion.identity);
+        }
+    }
+
+    void OldSpawnMeteor(){
         float r = Random.Range(0,4);
         GameObject meteor;
         // top down
@@ -66,31 +101,6 @@ public class EnemySpawner : MonoBehaviour
             float randY = Random.Range(_ymin,_ymax);
             meteor = Instantiate(_meteorPrefab, new Vector3(_xspawn_right, randY, 0), Quaternion.identity);
             meteor.GetComponent<Meteor>().setVel(new Vector3(-1f,0,0));
-        }
-    }
-
-    void SpawnEnemy(){
-        float r = Random.Range(0,4);
-        GameObject enemy;
-        // top down
-        if(r==0){
-            float randX = Random.Range(_xmin,_xmax);
-            enemy = Instantiate(_enemyPrefab, new Vector3(randX, _yspawn_top, 0), Quaternion.identity);
-        }
-        // bottom up
-        if(r==1){
-            float randX = Random.Range(_xmin,_xmax);
-            enemy = Instantiate(_enemyPrefab, new Vector3(randX, _yspawn_bot, 0), Quaternion.identity);
-        }
-        // left to right
-        if(r==2){
-            float randY = Random.Range(_ymin,_ymax);
-            enemy = Instantiate(_enemyPrefab, new Vector3(_xspawn_left, randY, 0), Quaternion.identity);
-        }
-        // right to left
-        if(r==3){
-            float randY = Random.Range(_ymin,_ymax);
-            enemy = Instantiate(_enemyPrefab, new Vector3(_xspawn_right, randY, 0), Quaternion.identity);
         }
     }
 }
